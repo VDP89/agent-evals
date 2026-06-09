@@ -1,0 +1,25 @@
+{
+  "_comment": "Drop these into your Claude Code settings.json. Adjust the path to wherever you put agent-evals. No '2>/dev/null || true' on the SessionEnd command — let failures leave a marker that the SessionStart check surfaces.",
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"/abs/path/to/agent-evals/session_eval.py\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"/abs/path/to/agent-evals/freshness_check.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/VDP89/agent-evals/schema/session-eval.v1.json",
+  "title": "session-eval/v1",
+  "description": "One deterministic record per Claude Code session, written at SessionEnd. No raw prompt/response text is stored — only counts and short labels.",
+  "type": "object",
+  "required": ["schema", "session_id", "date", "counts"],
+  "properties": {
+    "schema": { "const": "session-eval/v1" },
+    "session_id": { "type": ["string", "null"] },
+    "date": { "type": "string", "description": "Local date YYYY-MM-DD of session end." },
+    "started_at": { "type": ["string", "null"], "description": "ISO-8601." },
+    "ended_at": { "type": ["string", "null"], "description": "ISO-8601." },
+    "duration_min": { "type": ["number", "null"], "description": "Wall-clock, not active time." },
+    "end_reason": { "type": "string", "description": "clear | logout | exit | unknown." },
+    "cc_version": { "type": ["string", "null"] },
+    "entrypoint": { "type": ["string", "null"] },
+    "git_branch": { "type": ["string", "null"] },
+    "cwd": { "type": ["string", "null"] },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "user_prompts": { "type": "integer" },
+        "assistant_turns": { "type": "integer" },
+        "tool_calls": { "type": "integer" },
+        "errors": { "type": "integer" },
+        "subagents": { "type": "integer" },
+        "skills_invoked": { "type": "integer" }
+      }
+    },
+    "models": { "type": "object", "description": "Assistant turns per model id." },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "input": { "type": "integer" },
+        "output": { "type": "integer" },
+        "cache_read": { "type": "integer" },
+        "cache_creation": { "type": "integer" }
+      }
+    },
+    "tools": { "type": "object", "description": "Call count per tool name." },
+    "skills": { "type": "array", "items": { "type": "string" } },
+    "subagent_types": { "type": "array", "items": { "type": "string" } },
+    "deliverables": { "type": "array", "items": { "type": "string" }, "description": "Paths of formal output files (.docx/.xlsx/.pptx/.pdf/.dxf/.csv)." },
+    "files_touched": { "type": "array", "items": { "type": "string" } },
+    "dirs_touched": { "type": "array", "items": { "type": "string" }, "description": "Immediate subdirs of the project root the work touched (generic stand-in for a domain taxonomy)." },
+    "scars_fired": { "type": "object", "description": "Fire count per correction-rule id (friction signal). Empty if you do not use a scar/rule system." },
+    "hooks_fired": { "type": "object", "description": "Fire count per hook command basename." },
+    "friction": {
+      "type": "object",
+      "properties": {
+        "correction_turns": { "type": "integer", "description": "User turns that look like a correction." },
+        "samples": { "type": "array", "items": { "type": "string" }, "description": "Up to 2 short snippets; suppressed entirely if sensitive=true." }
+      }
+    },
+    "sensitive": { "type": "boolean", "description": "True if the session touched a path you marked sensitive; text samples are then suppressed." }
+  }
+}

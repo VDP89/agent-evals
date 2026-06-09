@@ -1,0 +1,5 @@
+# your captured records are yours — never commit them
+.agent-evals/
+__pycache__/
+*.pyc
+.DS_Store
