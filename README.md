@@ -6,7 +6,7 @@ A scar log tells you *that one correction* fired. It tells you nothing about the
 
 `agent-evals` is the smallest honest way to do it: one deterministic record per session, written when the session closes, at **zero token cost**, that **never blocks** the session. A month of those records becomes a short list of *mechanism* proposals — a rule to add, a habit to fix at the source, a model choice to recalibrate.
 
-This is a **reference implementation**, not a product. There is no `pip install`, no login, no remote telemetry. It is a sibling in spirit to [`lucy-syndrome`](https://github.com/VDP89/lucy-syndrome) (the paper + companion code), not to a maintained package. Copy the two files, wire them, change them. The essay that explains the *why* is [*How do you know a correction held?*](https://victordelpuerto.com).
+This is a **reference implementation**, not a product. There is no `pip install`, no login, no remote telemetry. It is a sibling in spirit to [`lucy-syndrome`](https://github.com/VDP89/lucy-syndrome) (the paper + companion code), not to a maintained package. Copy the two files, wire them, change them. The essay that explains the *why* is [*How do you know a correction held?*](https://victordelpuerto.com/posts/how-do-you-know-a-correction-held/).
 
 Apache-2.0.
 
@@ -97,4 +97,4 @@ It is not a product or a SaaS. It is not a model — capture is pure parsing, fu
 
 - [*Lucy Syndrome in LLM Agents*](https://doi.org/10.5281/zenodo.19555971) — the paper: corrections don't survive across sessions, and the fix runs outside the model.
 - [fscars](https://github.com/VDP89/fscars) — the correction primitive. agent-evals is the measurement layer above it; `scars_fired` is the bridge.
-- The essay this repo accompanies: [*How do you know a correction held?*](https://victordelpuerto.com)
+- The essay this repo accompanies: [*How do you know a correction held?*](https://victordelpuerto.com/posts/how-do-you-know-a-correction-held/)
